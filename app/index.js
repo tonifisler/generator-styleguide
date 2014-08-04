@@ -58,7 +58,7 @@ var AppGenerator = yeoman.generators.Base.extend({
     this.template('assets/README.md', 'assets/README.md');
     this.template('hologram_config.yml', 'hologram_config.yml');
 
-    this.copy('gulpfile.js', 'gulpfile.js');
+    this.template('gulpfile.js', 'gulpfile.js');
   },
 
   projectfiles: function () {
