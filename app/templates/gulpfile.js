@@ -1,30 +1,32 @@
 'use strict';
 
+/**
+ * Import plugins
+ */
 var gulp = require('gulp'),
-    gutil = require('gulp-util'),
-    notify = require('gulp-notify'),
-    jshint = require('gulp-jshint'),
-    sass = require('gulp-ruby-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
-    minifycss = require('gulp-minify-css'),
+    $ = require('gulp-load-plugins')(),
     browserSync = require('browser-sync'),
-    reload = browserSync.reload,
-    rename = require('gulp-rename'),
-    uglify = require('gulp-uglify'),
-    concat = require('gulp-concat'),
-    shell = require('gulp-shell'),
-    stylish = require('jshint-stylish'),
-    clean = require('gulp-clean');
+    reload = browserSync.reload;
 
-// Build vendors into themes
+/**
+ * Build vendors dependencies
+ */
 gulp.task('vendors', function() {
 
+  /**
+   * CSS VENDORS
+   */
   gulp.src([
         ''
       ])
-      .pipe(concat('vendors.css'))
-      .pipe(minifycss())
+      .pipe($.concat('vendors.css'))
+      .pipe($.minifyCss())
       .pipe(gulp.dest('build/css'));
+
+  /**
+   * JS VENDORS
+   * (with jQuery and Bootstrap dependencies first)
+   */
 
   gulp.src([
       'bower_components/jquery/jquery.js',
@@ -41,10 +43,15 @@ gulp.task('vendors', function() {
       'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js',
       'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js'
     ])
-    .pipe(concat('vendors.min.js'))
-    .pipe(uglify())
+    .pipe($.concat('vendors.min.js'))
+    .pipe($.uglify())
     .pipe(gulp.dest('build/js'));
 
+
+  /**
+   * FONTS SOURCES
+   * Important to add the bootstrap fonts to avoid issues with the fonts include path
+   */
   gulp.src([
       'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*',
       'assets/fonts/*'
@@ -52,36 +59,50 @@ gulp.task('vendors', function() {
     .pipe(gulp.dest('build/fonts'));
 });
 
-
-// STARTER THEME -------------------------------------------------------
-
+/**
+ * Build styles from SCSS files
+ * With error reporting on compiling (so that there's no crash)
+ */
 gulp.task('styles', function() {
-  return gulp.src('assets/sass/scss')
-    .pipe(sass())
-      .on('error', gutil.beep)
-      .on('error', notify.onError('Error: <%= error.message %>'))
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
-    .pipe(minifycss())
+  return gulp.src('assets/sass/<%=appname%>.scss')
+    .pipe($.rubySass())
+      .on('error', $.util.beep)
+      .on('error', $.notify.onError('Error: <%= error.message %>'))
+    .pipe($.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
+    .pipe($.minifyCss())
     .pipe(gulp.dest('build/css'));
 });
 
+/**
+ * Build JS
+ * With error reporting on compiling (so that there's no crash)
+ */
 gulp.task('scripts', function() {
   gulp.src('assets/js/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(concat('main.js'))
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.concat('main.js'))
     .pipe(gulp.dest('build/js'))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(uglify())
+    .pipe($.rename({ suffix: '.min' }))
+    .pipe($.uglify())
     .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('styleguide', shell.task([
+/**
+ * Build Hologram Styleguide
+ */
+gulp.task('styleguide', $.shell.task([
   'hologram'
 ]));
 
-gulp.task('default', ['vendors', 'watch']);
+/**
+ * Default task
+ */
+gulp.task('default', ['vendors', 'styles', 'scripts', 'watch', 'styleguide']);
 
+/**
+ * Watch task
+ */
 gulp.task('watch', function() {
   gulp.watch('assets/sass/**/*.scss', ['styles', 'styleguide']);
   gulp.watch('assets/js/*.js', ['scripts', 'styleguide']);
