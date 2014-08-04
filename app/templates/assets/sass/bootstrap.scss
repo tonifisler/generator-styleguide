@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+// Core variables and mixins
+@import "bootstrap-variables";
+@import "path/to/your/bootstrap/vendors/sass/mixins";
+
+// Reset and dependencies
+@import "path/to/your/bootstrap/vendors/sass/normalize";
+@import "path/to/your/bootstrap/vendors/sass/print";
+@import "path/to/your/bootstrap/vendors/sass/glyphicons";
+
+// Core CSS
+@import "path/to/your/bootstrap/vendors/sass/scaffolding";
+@import "path/to/your/bootstrap/vendors/sass/type";
+@import "path/to/your/bootstrap/vendors/sass/code";
+@import "path/to/your/bootstrap/vendors/sass/grid";
+@import "path/to/your/bootstrap/vendors/sass/tables";
+@import "path/to/your/bootstrap/vendors/sass/forms";
+@import "path/to/your/bootstrap/vendors/sass/buttons";
+
+// Components
+@import "path/to/your/bootstrap/vendors/sass/component-animations";
+@import "path/to/your/bootstrap/vendors/sass/dropdowns";
+@import "path/to/your/bootstrap/vendors/sass/button-groups";
+@import "path/to/your/bootstrap/vendors/sass/input-groups";
+@import "path/to/your/bootstrap/vendors/sass/navs";
+@import "path/to/your/bootstrap/vendors/sass/navbar";
+@import "path/to/your/bootstrap/vendors/sass/breadcrumbs";
+@import "path/to/your/bootstrap/vendors/sass/pagination";
+@import "path/to/your/bootstrap/vendors/sass/pager";
+@import "path/to/your/bootstrap/vendors/sass/labels";
+@import "path/to/your/bootstrap/vendors/sass/badges";
+@import "path/to/your/bootstrap/vendors/sass/jumbotron";
+@import "path/to/your/bootstrap/vendors/sass/thumbnails";
+@import "path/to/your/bootstrap/vendors/sass/alerts";
+@import "path/to/your/bootstrap/vendors/sass/progress-bars";
+@import "path/to/your/bootstrap/vendors/sass/media";
+@import "path/to/your/bootstrap/vendors/sass/list-group";
+@import "path/to/your/bootstrap/vendors/sass/panels";
+@import "path/to/your/bootstrap/vendors/sass/responsive-embed";
+@import "path/to/your/bootstrap/vendors/sass/wells";
+@import "path/to/your/bootstrap/vendors/sass/close";
+
+// Components w/ JavaScript
+@import "path/to/your/bootstrap/vendors/sass/modals";
+@import "path/to/your/bootstrap/vendors/sass/tooltip";
+@import "path/to/your/bootstrap/vendors/sass/popovers";
+@import "path/to/your/bootstrap/vendors/sass/carousel";
+
+// Utility classes
+@import "path/to/your/bootstrap/vendors/sass/utilities";
+@import "path/to/your/bootstrap/vendors/sass/responsive-utilities";
