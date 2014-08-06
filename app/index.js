@@ -64,6 +64,10 @@ var AppGenerator = yeoman.generators.Base.extend({
   projectfiles: function () {
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
+    this.copy('gitignore', '.gitignore');
+    this.copy('gitattributes', '.gitattributes');
+    this.copy('htaccess', '.htaccess');
+    this.copy('robots.txt', 'robots.txt');
   }
 });
 
