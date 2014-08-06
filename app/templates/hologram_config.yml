@@ -18,7 +18,7 @@ dependencies:
 
 # List all css to include for the styleguide render examples (path from styleguide directory)
 css_include:
-  - 'css/vendors.min.css'
+# - 'css/vendors.css'
   - 'css/<%= name %>.css'
 
 # List all js to include for the styleguide render examples (path from styleguide directory)
