@@ -131,6 +131,15 @@ gulp.task('serve', ['styles'], function () {
 });
 
 /**
+ * Deploy to GH pages
+ */
+
+gulp.task('deploy', function () {
+  gulp.src("styleguide/**/*")
+    .pipe($.ghPages());
+});
+
+/**
  * Default task
  */
 gulp.task('default', ['clean'], function(cb) {
