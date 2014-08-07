@@ -6,7 +6,9 @@
 var gulp = require('gulp'),
     $ = require('gulp-load-plugins')(),
     browserSync = require('browser-sync'),
-    reload = browserSync.reload;
+    reload = browserSync.reload,
+    runSequence = require('run-sequence'),
+    del = require('del');
 
 /**
  * Build vendors dependencies
@@ -80,9 +82,7 @@ gulp.task('styles', function() {
  * With error reporting on compiling (so that there's no crash)
  */
 gulp.task('scripts', function() {
-  gulp.src('assets/js/*.js')
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
+  return gulp.src('assets/js/*.js')
     .pipe($.concat('main.js'))
     .pipe(gulp.dest('build/js'))
     .pipe($.rename({ suffix: '.min' }))
@@ -91,22 +91,49 @@ gulp.task('scripts', function() {
 });
 
 /**
+ * Lint JS
+ */
+
+ gulp.task('jshint', function () {
+   return gulp.src('assets/js/*js')
+     .pipe($.jshint())
+     .pipe($.jshint.reporter('jshint-stylish'))
+     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+ });
+
+/**
  * Build Hologram Styleguide
  */
-gulp.task('styleguide', $.shell.task([
-  'hologram'
-]));
+gulp.task('styleguide', function () {
+  return gulp.src('hologram_config.yml')
+    .pipe($.hologram());
+});
+
+/**
+ * Clean output directories
+ */
+gulp.task('clean', del.bind(null, ['build', 'styleguide']));
+
+/**
+ * Serve
+ */
+gulp.task('serve', ['styles'], function () {
+  browserSync({
+    server: {
+      baseDir: ['styleguide'],
+    },
+    open: false
+  });
+  gulp.watch(['**/*.html'], reload);
+  gulp.watch(['assets/sass/**/*.scss'], function() {
+    runSequence('styles', 'styleguide', reload);
+  });
+});
 
 /**
  * Default task
  */
-gulp.task('default', ['vendors', 'styles', 'scripts', 'watch', 'styleguide']);
-
-/**
- * Watch task
- */
-gulp.task('watch', function() {
-  gulp.watch('assets/sass/**/*.scss', ['styles', 'styleguide']);
-  gulp.watch('assets/js/*.js', ['scripts', 'styleguide']);
+gulp.task('default', ['clean'], function(cb) {
+  runSequence('vendors', 'styles', 'jshint', 'scripts', 'styleguide', cb);
 });
 
