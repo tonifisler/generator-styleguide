@@ -41,6 +41,7 @@ var AppGenerator = yeoman.generators.Base.extend({
   app: function () {
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
+    this.template('README.md', 'README.md');
 
     this.directory('assets/sass/components', 'assets/sass/components');
     this.directory('assets/sass/javascript', 'assets/sass/javascript');
