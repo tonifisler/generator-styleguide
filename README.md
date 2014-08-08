@@ -38,6 +38,12 @@ $ yo styleguide
 * jshint linting
 * Browser-sync built-in server
 
+## Credits
+
+- The bootstrap files are based on [Yago](https://github.com/yago)'s [Holostrap](https://github.com/Yago/Holostrap)
+- The Hologram theme used is [Yago](https://github.com/yago)'s [Cortana](https://github.com/Yago/Cortana)
+
+
 ## License
 
 MIT
