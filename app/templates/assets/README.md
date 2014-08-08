@@ -1,1 +1,1 @@
-# <%= name %> Styleguide
+# <%= appname %> Styleguide
