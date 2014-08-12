@@ -2,7 +2,7 @@
   "name": "generator-styleguide",
   "author": "tonifisler - Antistatique",
   "repository": "tonifisler/generator-styleguide",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "app/index.js",
   "description": "Generator for a basic Hologram styleguide. Includes Bootstrap Sass starting files from the start.",
@@ -22,9 +22,6 @@
     "node": ">=0.10.0",
     "npm": ">=1.4"
   },
-  "files": [
-    "app"
-  ],
   "dependencies": {
     "chalk": "^0.4.0",
     "yeoman-generator": "^0.17.1",
