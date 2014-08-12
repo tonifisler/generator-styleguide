@@ -67,7 +67,7 @@ gulp.task('vendors', function() {
  */
 gulp.task('styles', function() {
   return gulp.src('assets/sass/<%=appname%>.scss')
-    .pipe($.sass())
+    .pipe($.rubySass())
       .on('error', $.util.beep)
       .on('error', $.notify.onError(function (error) {
         return 'Message to the notifier: ' + error.message;
