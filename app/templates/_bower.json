@@ -2,8 +2,8 @@
   "name": "<%= appname %>",
   "devDependencies": {
     "jquery": "~1.11.1",
-    "Cortana": "~1.2.1",
-    "bootstrap-sass-official": "~3.1.1",
+    "Cortana": "~1.2.5",
+    "bootstrap-sass-official": "~3.2.0",
     "FlexSlider": "master",
     "angular": "~1.2.20",
     "font-awesome": "~4.1.0"
