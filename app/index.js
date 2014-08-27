@@ -13,6 +13,9 @@ var AppGenerator = yeoman.generators.Base.extend({
     this.on('end', function () {
       if (!this.options['skip-install']) {
         this.installDependencies();
+        this.log(yosay('Everything went smoothly! We\'ll just download the dependencies now. Bye from Antistatique!'));
+      } else {
+        this.log(yosay('Everything went smoothly! Bye from Antistatique!'));
       }
     });
   },
