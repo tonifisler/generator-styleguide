@@ -855,3 +855,6 @@ $hr-border:                   $gray-lighter !default;
 
 //** Horizontal offset for forms and lists.
 $component-offset-horizontal: 180px !default;
+
+//** Width of horizontal description list titles
+$dl-horizontal-offset:        $component-offset-horizontal !default;
