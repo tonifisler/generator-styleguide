@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload,
     runSequence = require('run-sequence'),
+    argv = require('yargs').argv,
     del = require('del');
 
 /**
@@ -68,9 +69,11 @@ gulp.task('vendors', function() {
 gulp.task('styles', function() {
   return gulp.src('assets/sass/<%=appname%>.scss')
     .pipe($.rubySass())
-      .on('error', $.util.beep)
       .on('error', $.notify.onError(function (error) {
-        return 'Message to the notifier: ' + error.message;
+         console.log(error.message);
+         if (!argv.production) {
+           return 'Message to the notifier: ' + error.message;
+         }
       }))
     .pipe($.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
     .pipe($.minifyCss())
