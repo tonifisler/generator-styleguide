@@ -83,26 +83,18 @@ gulp.task('styles', function() {
 /**
  * Build JS
  * With error reporting on compiling (so that there's no crash)
+ * And jshint check to highlight errors as we go.
  */
 gulp.task('scripts', function() {
   return gulp.src('assets/js/*.js')
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.concat('main.js'))
     .pipe(gulp.dest('build/js'))
     .pipe($.rename({ suffix: '.min' }))
     .pipe($.uglify())
     .pipe(gulp.dest('build/js'));
 });
-
-/**
- * Lint JS
- */
-
- gulp.task('jshint', function () {
-   return gulp.src('assets/js/*js')
-     .pipe($.jshint())
-     .pipe($.jshint.reporter('jshint-stylish'))
-     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
- });
 
 /**
  * Build Hologram Styleguide
@@ -120,7 +112,7 @@ gulp.task('clean', del.bind(null, ['build', 'styleguide']));
 /**
  * Serve
  */
-gulp.task('serve', ['styles'], function () {
+gulp.task('serve', ['styles', 'scripts'], function () {
   browserSync({
     server: {
       baseDir: ['styleguide'],
@@ -130,6 +122,9 @@ gulp.task('serve', ['styles'], function () {
   gulp.watch(['**/*.html'], reload);
   gulp.watch(['assets/sass/**/*.scss'], function() {
     runSequence('styles', 'styleguide', reload);
+  });
+  gulp.watch(['assets/js/**/*.js'], function() {
+    runSequence('scripts', reload);
   });
 });
 
@@ -146,6 +141,6 @@ gulp.task('deploy', function () {
  * Default task
  */
 gulp.task('default', ['clean'], function(cb) {
-  runSequence('vendors', 'styles', 'jshint', 'scripts', 'styleguide', cb);
+  runSequence('vendors', 'styles', 'scripts', 'styleguide', cb);
 });
 
