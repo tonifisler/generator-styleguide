@@ -67,6 +67,7 @@ gulp.task('vendors', function() {
  * With error reporting on compiling (so that there's no crash)
  */
 gulp.task('styles', function() {
+  if (argv.production) { console.log('Processing styles for production env.' ); }
   return gulp.src('assets/sass/<%=appname%>.scss')
     .pipe($.rubySass())
       .on('error', $.notify.onError(function (error) {
@@ -135,6 +136,14 @@ gulp.task('serve', ['styles', 'scripts'], function () {
 gulp.task('deploy', function () {
   gulp.src("styleguide/**/*")
     .pipe($.ghPages());
+});
+
+/**
+ * Task to build assets on production server
+ */
+gulp.task('production',['clean'], function() {
+    argv.production = true;
+    runSequence('vendors', 'styles', 'scripts');
 });
 
 /**
