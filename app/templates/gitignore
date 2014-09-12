@@ -4,3 +4,6 @@ dist
 .sass-cache
 bower_components
 test/bower_components
+
+styleguide
+build
