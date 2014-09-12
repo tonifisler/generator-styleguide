@@ -60,6 +60,18 @@ gulp.task('vendors', function() {
       'assets/fonts/*'
     ])
     .pipe(gulp.dest('build/fonts'));
+
+  /**
+   * POLYFILLS SOURCES
+   * Various polyfills required for old IE
+   */
+  gulp.src([
+      'bower_components/html5shiv/dist/html5shiv.js',
+      'bower_components/respond/dest/respond.src.js'
+    ])
+    .pipe($.concat('polyfills.min.js'))
+    .pipe($.uglify())
+    .pipe(gulp.dest('build/js'));
 });
 
 /**

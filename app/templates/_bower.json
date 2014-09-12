@@ -1,6 +1,8 @@
 {
   "name": "<%= appname %>",
   "devDependencies": {
+    "html5shiv": "3.7.2",
+    "respond": "1.4.2",
     "Cortana": "~1.2.6",
     "bootstrap-sass-official": "v3.2.0+1"
   }
