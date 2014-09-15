@@ -88,7 +88,7 @@ gulp.task('styles', function() {
            return 'Message to the notifier: ' + error.message;
          }
       }))
-    .pipe($.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 27' 'opera 12.1'))
+    .pipe($.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1'))
     .pipe($.minifyCss())
     .pipe(gulp.dest('build/css'));
 });
