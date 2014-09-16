@@ -132,7 +132,7 @@ gulp.task('serve', ['styles', 'scripts'], function () {
     },
     open: false
   });
-  gulp.watch(['**/*.html'], reload);
+  gulp.watch(['styleguide/*.html'], reload);
   gulp.watch(['assets/sass/**/*.scss'], function() {
     runSequence('styles', 'styleguide', reload);
   });
