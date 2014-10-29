@@ -1,8 +1,4 @@
-# <%= appname %> Styleguide
-
-This is my new awesome styleguide generated with [Antistatique](http://www.antistatique.net)'s [styleguide-generator](https://github.com/tonifisler/generator-styleguide)! 
-
-**<3 Yeoman + Gulp + Hologram**
+# <%= name %> Styleguide
 
 ```none_example
 <div class="row">
@@ -55,3 +51,5 @@ This is my new awesome styleguide generated with [Antistatique](http://www.antis
   </div>
 </div>
 ```
+
+**<3 Yeoman + Gulp + Hologram**

@@ -31,11 +31,31 @@ var AppGenerator = yeoman.generators.Base.extend({
       name: 'name',
       message: "What's the name of your project?",
       default: this.appname
+    },
+    {
+      type: 'input',
+      name: 'repo_url',
+      message: "What's the name of your repo?",
+      default: this.appname
+    },
+    {
+      type: 'input',
+      name: 'github_user',
+      message: "What's your Github username?",
+      default: 'username'
+    },
+    {
+      type: 'input',
+      name: 'version',
+      message: "What's the current version number?",
+      default: '0.0.0'
     }];
 
     this.prompt(prompts, function (props) {
       this.name = props.name;
-      this.appname = this.name;
+      this.github_user = props.github_user;
+      this.repo_url = props.repo_url;
+      this.version = props.version;
 
       done();
     }.bind(this));
