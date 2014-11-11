@@ -30,7 +30,7 @@ var AppGenerator = yeoman.generators.Base.extend({
       type: 'input',
       name: 'name',
       message: "What's the name of your project?",
-      default: this.appname
+      default: 'Styleguide'
     },
     {
       type: 'input',
