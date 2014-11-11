@@ -81,7 +81,7 @@ gulp.task('vendors', function() {
 gulp.task('styles', function() {
   if (argv.production) { console.log('Processing styles for production env.' ); }
   return gulp.src('assets/sass/<%=appname%>.scss')
-    .pipe($.rubySass())
+    .pipe($.rubySass({style: 'compact'}))
       .on('error', $.notify.onError(function (error) {
          console.log(error.message);
          if (!argv.production) {
