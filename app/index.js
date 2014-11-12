@@ -76,10 +76,10 @@ var AppGenerator = yeoman.generators.Base.extend({
     this.copy('assets/sass/bootstrap-variables.scss', 'assets/sass/bootstrap-variables.scss');
     this.copy('assets/sass/bootstrap.scss', 'assets/sass/bootstrap.scss');
 
-    this.template('assets/sass/project-variables.scss', 'assets/sass/'+this.name+'-variables.scss');
-    this.template('assets/sass/project-mixins.scss', 'assets/sass/'+this.name+'-mixins.scss');
-    this.template('assets/sass/project.scss', 'assets/sass/'+this.name+'.scss');
-    this.template('assets/js/project.js', 'assets/js/'+this.name+'.js');
+    this.template('assets/sass/project-variables.scss', 'assets/sass/'+this.appname+'-variables.scss');
+    this.template('assets/sass/project-mixins.scss', 'assets/sass/'+this.appname+'-mixins.scss');
+    this.template('assets/sass/project.scss', 'assets/sass/'+this.appname+'.scss');
+    this.template('assets/js/project.js', 'assets/js/'+this.appname+'.js');
     this.template('assets/README.md', 'assets/README.md');
     this.template('hologram_config.yml', 'hologram_config.yml');
 
