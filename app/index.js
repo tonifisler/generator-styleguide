@@ -13,6 +13,9 @@ var AppGenerator = yeoman.generators.Base.extend({
     this.on('end', function () {
       if (!this.options['skip-install']) {
         this.installDependencies();
+        this.log(yosay('Everything went smoothly! We\'ll just download the dependencies now. Bye from Antistatique!'));
+      } else {
+        this.log(yosay('Everything went smoothly! Bye from Antistatique!'));
       }
     });
   },
@@ -46,7 +49,6 @@ var AppGenerator = yeoman.generators.Base.extend({
     this.directory('assets/sass/components', 'assets/sass/components');
     this.directory('assets/sass/javascript', 'assets/sass/javascript');
     this.directory('assets/sass/layout', 'assets/sass/layout');
-    this.directory('assets/doc_assets', 'assets/doc_assets');
 
     this.mkdir('assets/fonts');
     this.mkdir('img');

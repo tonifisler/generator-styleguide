@@ -29,6 +29,14 @@ Finally, initiate the generator:
 $ yo styleguide
 ```
 
+## On production server
+
+If you build your assets on production server, make sure to run `$ gulp styles` like this to avoid issues with gulp-notify:
+
+```
+$ gulp styles --production
+```
+
 ## Features
 
 * Gulp
