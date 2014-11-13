@@ -75,6 +75,16 @@ gulp.task('vendors', function() {
 });
 
 /**
+ * Copy images
+ */
+gulp.task('img', function() {
+  gulp.src([
+      'assets/img/**/*'
+    ])
+    .pipe(gulp.dest('build/img'));
+});
+
+/**
  * Build styles from SCSS files
  * With error reporting on compiling (so that there's no crash)
  */
@@ -136,6 +146,9 @@ gulp.task('serve', ['styles', 'scripts'], function () {
   gulp.watch(['assets/sass/**/*.scss'], function() {
     runSequence('styles', 'styleguide', reload);
   });
+  gulp.watch(['assets/img/**/*'], function() {
+    runSequence('img', 'styleguide', reload);
+  });
   gulp.watch(['assets/js/**/*.js'], function() {
     runSequence('scripts', reload);
   });
@@ -155,13 +168,13 @@ gulp.task('deploy', function () {
  */
 gulp.task('production',['clean'], function() {
     argv.production = true;
-    runSequence('vendors', 'styles', 'scripts');
+    runSequence('vendors', 'styles', 'img', 'scripts');
 });
 
 /**
  * Default task
  */
 gulp.task('default', ['clean'], function(cb) {
-  runSequence('vendors', 'styles', 'scripts', 'styleguide', cb);
+  runSequence('vendors', 'styles', 'img', 'scripts', 'styleguide', cb);
 });
 

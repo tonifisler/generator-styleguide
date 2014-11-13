@@ -14,6 +14,7 @@ index: README
 dependencies:
   - build/js
   - build/css
+  - build/img
   - build/fonts
 
 # List all css to include for the styleguide render examples (path from styleguide directory)
