@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+// Init ------------------------------------
+@import '<%=appname%>-mixins';
+@import '<%=appname%>-variables';
+@import 'bootstrap';
+
+// LAYOUT ----------------------------------
+@import 'layout/buttons';
+@import 'layout/code';
+@import 'layout/form';
+@import 'layout/icons';
+@import 'layout/images';
+@import 'layout/tables';
+@import 'layout/typography';
+
+// COMPONENTS -------------------------------
+@import 'components/alerts';
+@import 'components/badges';
+@import 'components/breadcrumb';
+@import 'components/button-groups';
+@import 'components/input-groups';
+@import 'components/jumbotron';
+@import 'components/labels';
+@import 'components/list-group';
+@import 'components/media';
+@import 'components/nav';
+@import 'components/navbar';
+@import 'components/pager';
+@import 'components/paginations';
+@import 'components/panels';
+@import 'components/progress-bar';
+@import 'components/thumbnails';
+@import 'components/well';
+
+// JAVASCRIPT WIDGET -------------------------
+@import 'javascript/alert';
+@import 'javascript/buttons';
+@import 'javascript/carousel';
+@import 'javascript/collapse';
+@import 'javascript/dropdown';
+@import 'javascript/modal';
+@import 'javascript/popover';
+@import 'javascript/scrollspy';
+@import 'javascript/tab';
+@import 'javascript/tooltips';
