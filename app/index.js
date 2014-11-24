@@ -6,6 +6,8 @@ var yosay = require('yosay');
 var chalk = require('chalk');
 
 
+util.inherits(Generator, yeoman.generators.NamedBase);
+
 var AppGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');

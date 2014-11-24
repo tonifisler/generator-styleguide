@@ -1,7 +1,7 @@
 /*doc
 ---
 title: <%= component_name %>
-name: <%= slugify(component_name) %>
+name: <%= _.slugify(component_name) %>
 category: <%= styleguide_main_category %> - <%= styleguide_category %>
 ---
 

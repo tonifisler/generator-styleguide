@@ -1,12 +1,13 @@
 'use strict';
 var util = require('util');
+var generatorUtil = require('../util.js');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 
 
-var ComponentGenerator = yeoman.generators.NamedBase.extend({
+var ComponentGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
   },
@@ -24,7 +25,7 @@ var ComponentGenerator = yeoman.generators.NamedBase.extend({
       type: 'list',
       name: 'component_type',
       message: "Which type of component is it?",
-      choices: ['layout', 'component', 'javascript']
+      choices: ['layout', 'components', 'javascript']
     },
     {
       type: 'input',
@@ -39,7 +40,7 @@ var ComponentGenerator = yeoman.generators.NamedBase.extend({
       default: "Category"
     },];
 
-    this.prompt(prompts, function () {
+    this.prompt(prompts, function (props) {
       this.component_name = props.component_name;
       this.component_type = props.component_type;
       this.styleguide_main_category = props.styleguide_main_category;
@@ -53,18 +54,26 @@ var ComponentGenerator = yeoman.generators.NamedBase.extend({
   },
 
   addComponent: function(props) {
-    var fileBase = this._.underscored(component_name);
-    var scssFile  = "assets/sass/" + component_type + "/" + fileBase + ".scss";
+    this.fileBase = this._.underscored(this.component_name);
+    var scssFile  = "assets/sass/" + this.component_type + "/" + this.fileBase + ".scss";
 
     this.template("_component.scss", scssFile);
   },
 
   addToProject: function(){
-      var menu = this.read("assets/sass/main.scss");
-      var t = '@import <%= component_type %><%= component_name %>;\n';
-      var line = this.engine(t, context);
+      // var menu = this.read("assets/sass/main.scss");
+      // var t = '@import <%= component_type %>/<%= component_name %>;';
+      // var line = this.engine(t, context);
 
-      menu = this.append(menu, "div.menu", line);
+      // menu = this.append(menu, "div.menu", line);
+
+      generatorUtil.rewriteFile({
+        file: 'assets/sass/main.scss',
+        needle: '// <here> don\'t remove this comment',
+        splicable: [
+          '@import \''+this.component_type+'/'+this.fileBase+'\';'
+        ]
+      });
 
       // this.write("app/menu.html");
 
