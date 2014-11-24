@@ -154,7 +154,7 @@ gulp.task('deploy', function () {
 /**
  * Task to build assets on production server
  */
-gulp.task('production',['clean'], function() {
+gulp.task('build',['clean'], function() {
     argv.production = true;
     runSequence('vendors', 'styles', 'scripts');
 });
