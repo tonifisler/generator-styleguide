@@ -27,14 +27,12 @@ Finally, initiate the generator:
 
 ```bash
 $ yo styleguide
-```
 
-## On production server
+# To create a new component:
+$ yo styleguide:component
 
-If you build your assets on production server, make sure to run `$ gulp styles` like this to avoid issues with gulp-notify:
-
-```
-$ gulp styles --production
+# To create a new Twig page:
+$ yo styleguide:twig
 ```
 
 ## Features
@@ -45,6 +43,7 @@ $ gulp styles --production
 * CSS Autoprefixer
 * jshint linting
 * Browser-sync built-in server
+* Twig template files
 
 ## Credits
 
