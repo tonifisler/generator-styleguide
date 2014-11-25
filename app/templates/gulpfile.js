@@ -118,6 +118,18 @@ gulp.task('styleguide', function () {
     .pipe($.hologram());
 });
 
+<% if (useTwig) { %>
+/**
+ * Compile TWIG example pages
+ */
+
+gulp.task('twig', function () {
+    return gulp.src('assets/pages/*.twig')
+        .pipe($.twig())
+        .pipe(gulp.dest('styleguide/pages'));
+});
+<% } %>
+
 /**
  * Clean output directories
  */
