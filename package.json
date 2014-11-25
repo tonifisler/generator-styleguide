@@ -2,7 +2,7 @@
   "name": "generator-styleguide",
   "author": "tonifisler - Antistatique",
   "repository": "tonifisler/generator-styleguide",
-  "version": "0.1.10",
+  "version": "0.2.0",
   "license": "MIT",
   "main": "app/index.js",
   "description": "Generator for a basic Hologram styleguide. Includes Bootstrap Sass starting files from the start.",
