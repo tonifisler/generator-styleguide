@@ -17,6 +17,7 @@
     "gulp-notify": "^2.0.0",
     "gulp-rename": "~1.2.0",
     "gulp-ruby-sass": "^0.7.1",
+    <% if (useTwig) { %>"gulp-twig": "0.0.4",<% } %>
     "gulp-uglify": "~1.0.1",
     "gulp-util": "^3.0.1",
     "jshint-stylish": "^1.0.0",

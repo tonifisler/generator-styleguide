@@ -49,6 +49,12 @@ var AppGenerator = yeoman.generators.Base.extend({
       name: 'version',
       message: "What's the current version number?",
       default: '0.0.0'
+    },
+    {
+      type: 'confirm',
+      name: 'twig',
+      message: "Would you like to generate some twig example pages?",
+      default: false
     }];
 
     this.prompt(prompts, function (props) {
@@ -56,13 +62,14 @@ var AppGenerator = yeoman.generators.Base.extend({
       this.github_user = props.github_user;
       this.repo_url = props.repo_url;
       this.version = props.version;
+      this.useTwig = props.twig;
 
       done();
     }.bind(this));
   },
 
   app: function () {
-    this.copy('_package.json', 'package.json');
+    this.template('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
     this.template('README.md', 'README.md');
 
@@ -93,6 +100,15 @@ var AppGenerator = yeoman.generators.Base.extend({
     this.copy('gitattributes', '.gitattributes');
     this.copy('htaccess', '.htaccess');
     this.copy('robots.txt', 'robots.txt');
+  },
+
+  addTwigToProject: function() {
+    if (this.useTwig) {
+      this.copy('layout.twig', 'assets/pages/layout.twig');
+      this.composeWith('styleguide:twig', { options: {
+        name: 'index'
+      }});
+    }
   }
 });
 

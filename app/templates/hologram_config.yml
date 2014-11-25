@@ -14,12 +14,13 @@ index: README
 dependencies:
   - build/js
   - build/css
+  - build/img
   - build/fonts
 
 # List all css to include for the styleguide render examples (path from styleguide directory)
 css_include:
 # - 'css/vendors.css'
-  - 'css/<%= appname %>.css'
+  - 'css/main.css'
 
 # List all js to include for the styleguide render examples (path from styleguide directory)
 js_include:
