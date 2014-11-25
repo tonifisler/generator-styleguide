@@ -5,7 +5,6 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 
-
 var AppGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
@@ -85,8 +84,8 @@ var AppGenerator = yeoman.generators.Base.extend({
 
     this.template('assets/sass/project-variables.scss', 'assets/sass/'+this.appname+'-variables.scss');
     this.template('assets/sass/project-mixins.scss', 'assets/sass/'+this.appname+'-mixins.scss');
-    this.template('assets/sass/project.scss', 'assets/sass/'+this.appname+'.scss');
-    this.template('assets/js/project.js', 'assets/js/'+this.appname+'.js');
+    this.template('assets/sass/main.scss', 'assets/sass/main.scss');
+    this.template('assets/js/main.js', 'assets/js/main.js');
     this.template('assets/README.md', 'assets/README.md');
     this.template('hologram_config.yml', 'hologram_config.yml');
 

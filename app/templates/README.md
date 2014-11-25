@@ -1,9 +1,23 @@
 # <%=name%> Styleguide
 
-### Build the styleguide
+### Install the styleguide
 
 ```bash
+$ npm install
+$ bower install
 $ gulp
+```
+
+### Build the styleguide with minification
+
+```bash
+$ gulp --production
+```
+
+### Build only the minimum required for production
+
+```bash
+$ gulp build
 ```
 
 ### Watch and compile files as you go
@@ -19,4 +33,4 @@ $ gulp deploy
 ```
 
 
-> This is a Yeoman generated styleguide for <%=appname%>.
+> This is a Yeoman generated styleguide for <%=name%>.
