@@ -138,7 +138,7 @@ gulp.task('clean', del.bind(null, ['build', 'styleguide']));
 /**
  * Serve
  */
-gulp.task('serve', ['styles', 'scripts'], function () {
+gulp.task('serve', ['styles', 'scripts'<% if (useTwig) { %>, 'twig'<% } %>], function () {
   browserSync({
     server: {
       baseDir: ['styleguide'],
@@ -152,6 +152,13 @@ gulp.task('serve', ['styles', 'scripts'], function () {
   gulp.watch(['assets/js/**/*.js'], function() {
     runSequence('scripts', reload);
   });
+  <% if (useTwig) { %>
+  gulp.watch(['assets/pages/**/*'], function() {
+    // clean folder before compiling
+    del.bind(null, ['styleguide/pages'])
+    runSequence('twig', reload);
+  });
+  <% } %>
 });
 
 /**
@@ -175,6 +182,6 @@ gulp.task('build',['clean'], function() {
  * Default task
  */
 gulp.task('default', ['clean'], function(cb) {
-  runSequence('vendors', 'styles', 'scripts', 'styleguide', cb);
+  runSequence('vendors', 'styles', 'scripts',<% if (useTwig) { %>'twig',<% } %> 'styleguide', cb);
 });
 
