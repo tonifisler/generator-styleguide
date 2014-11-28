@@ -160,7 +160,6 @@ gulp.task('serve', ['styles', 'scripts'<% if (useTwig) { %>, 'twig'<% } %>], fun
     },
     open: false
   });
-  gulp.watch(['styleguide/*.html'], reload);
   gulp.watch(['assets/sass/**/*.scss'], function() {
     runSequence('styles', 'styleguide', reload);
   });
