@@ -1,5 +1,5 @@
 {
-  "name": "<%= _.slugify(appname) %>",
+  "name": "<%= _.slugify(name) %>",
   "author": "<%=github_user%>",
   "version": "<%=version%>",
   "main": "index.html",

@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 // Init ------------------------------------
-@import '<%=appname%>-mixins';
-@import '<%=appname%>-variables';
+@import '<%=_.slugify(name)%>-mixins';
+@import '<%=_.slugify(name)%>-variables';
 @import 'bootstrap';
 
 // LAYOUT ----------------------------------

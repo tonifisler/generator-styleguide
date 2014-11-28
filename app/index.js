@@ -35,7 +35,7 @@ var AppGenerator = yeoman.generators.Base.extend({
       type: 'input',
       name: 'repo_url',
       message: "What's the name of your repo?",
-      default: this.appname
+      default: this._.slugify(this.appname)
     },
     {
       type: 'input',
