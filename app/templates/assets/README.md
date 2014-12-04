@@ -1,4 +1,4 @@
-# <%= name %> Styleguide
+# <%= name %>
 
 ```none_example
 <div class="row">
@@ -20,7 +20,7 @@
 <hr>
 <div class="row">
   <div class="col-md-6">
-    <h3 class="text-muted">Listes</h3>
+    <h3 class="text-muted">Lists</h3>
     <ul>
       <li>Lorem</li>
       <li>Ipsum</li>
@@ -36,7 +36,7 @@
     </ol>
   </div>
   <div class="col-md-6">
-    <h3 class="text-muted">Composants</h3>
+    <h3 class="text-muted">Components</h3>
     <form role="form">
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
