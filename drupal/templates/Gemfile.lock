@@ -1,0 +1,29 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    capdrupal (0.9.6)
+      capistrano (~> 2.13, >= 2.13.4)
+      railsless-deploy (~> 1.1, >= 1.1.2)
+    capistrano (2.15.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    highline (1.6.21)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.1)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
+    railsless-deploy (1.1.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  capdrupal
+  capistrano (~> 2.15.5)
+  railsless-deploy

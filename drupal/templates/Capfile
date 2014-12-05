@@ -1,0 +1,5 @@
+require 'rubygems'
+require 'railsless-deploy'
+require 'capdrupal'
+require 'capistrano/ext/multistage'
+load    'config/deploy'
