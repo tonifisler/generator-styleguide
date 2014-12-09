@@ -103,10 +103,7 @@ gulp.task('img', function() {
        browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1'],
        cascade: false
      }))
-     .pipe($.if(!argv.production, $.sourcemaps.write('.', {
-       includeContent: false,
-       sourceRoot: '/source'
-     })))
+     .pipe($.if(!argv.production, $.sourcemaps.write()))
      .pipe($.if(argv.production, $.minifyCss()))
      .pipe(gulp.dest('build/css'));
  });
