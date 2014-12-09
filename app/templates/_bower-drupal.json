@@ -1,6 +1,0 @@
-{
-  "name": "<%= _.slugify(name) %>",
-  "devDependencies": {
-    "<%= styleguide_repo %>": "*",
-  }
-}
