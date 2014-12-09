@@ -33,6 +33,9 @@ $ yo styleguide:component
 
 # To create a new Twig page:
 $ yo styleguide:twig
+
+#To create a basic Drupal environment with an external styleguide repo
+$ yo styleguide:drupal
 ```
 
 ## Features
@@ -43,7 +46,14 @@ $ yo styleguide:twig
 * CSS Autoprefixer
 * jshint linting
 * Browser-sync built-in server
-* Twig template files
+* Components sub-generator
+* Twig template files sub-generator
+* Drupal sub-generator
+
+## TODO
+
+* Add a README to the Drupal generated files
+* Fix `gulp-twig` endless loop
 
 ## Credits
 
