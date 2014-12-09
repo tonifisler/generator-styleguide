@@ -15,7 +15,7 @@ var DrupalGenerator = yeoman.generators.Base.extend({
   askFor: function () {
     var done = this.async();
 
-    this.log("This will generate the basic files you need to deploy your Drupal site with Capistrano. Keep in mind you still have to edit deploy.rb and the files located in deploy/* before being completely set.");
+    this.log("This will generate the basic files you need to deploy your Drupal site with Capistrano. Keep in mind you still have to edit deploy.rb and the files located in deploy before being completely set.");
 
     var prompts = [{
       type: 'input',
@@ -53,8 +53,17 @@ var DrupalGenerator = yeoman.generators.Base.extend({
   },
 
   app: function () {
-    this.copy('config/deploy', 'config/deploy');
+    this.copy('package.json', 'package.json');
+    this.copy('Gemfile', 'Gemfile');
+    this.copy('Gemfile.lock', 'Gemfile.lock');
+    this.copy('Capfile', 'Capfile');
+
+    this.directory('deploy', 'config/deploy');
+    this.template('deploy.rb', 'config/deploy.rb');
+    this.template('recipes.rb', 'config/recipes.rb');
+
     this.template('gulpfile.js', 'gulpfile.js');
+
   }
 });
 

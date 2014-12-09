@@ -1,4 +1,4 @@
-set :styleguide_repository,     "git@github.com:antistatique/<%= styleguide_repository %>.git"
+set :styleguide_repository,     "git@github.com:<%= github_user %>/<%= styleguide_name %>.git"
 
 # Require to have on the server
 # - node + npm
@@ -23,6 +23,7 @@ namespace :styleguide do
 
   desc "copy assets into drupal"
   task :copy_build do
-    run "cp -r #{shared_path}/styleguide/build #{latest_release}/drupal/sites/all/themes/jj2015/build"
+    # this is our usual path on our server. Edit at your will.
+    run "cp -r #{shared_path}/styleguide/build #{latest_release}/drupal/sites/all/themes/<%= theme_name %>/build"
   end
 end
