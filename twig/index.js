@@ -13,9 +13,9 @@ var TwigGenerator = generators.Base.extend({
   },
 
   askFor: function () {
-    if (!this.options.name) {
-      var done = this.async();
+    var done = this.async();
 
+    if (!this.options.name) {
       var prompts = [{
         type: 'input',
         name: 'name',
@@ -29,6 +29,7 @@ var TwigGenerator = generators.Base.extend({
       }.bind(this));
     } else {
       this.name = this.options.name;
+      done();
     }
   },
 
