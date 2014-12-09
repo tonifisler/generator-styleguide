@@ -10,6 +10,15 @@ var chalk = require('chalk');
 var DrupalGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
+
+    this.on('end', function () {
+      if (!this.options['skip-install']) {
+        this.installDependencies();
+        this.log(yosay('Everything went smoothly! We\'ll just download the dependencies now. Bye from Antistatique!'));
+      } else {
+        this.log(yosay('Everything went smoothly! Bye from Antistatique!'));
+      }
+    });
   },
 
   askFor: function () {
