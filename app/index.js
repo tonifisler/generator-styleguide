@@ -77,7 +77,6 @@ var AppGenerator = yeoman.generators.Base.extend({
     this.directory('assets/sass/layout', 'assets/sass/layout');
 
     this.mkdir('assets/fonts');
-    this.mkdir('img');
 
     this.copy('assets/sass/bootstrap-variables.scss', 'assets/sass/bootstrap-variables.scss');
     this.copy('assets/sass/bootstrap.scss', 'assets/sass/bootstrap.scss');
