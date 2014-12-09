@@ -61,7 +61,7 @@ var AppGenerator = yeoman.generators.Base.extend({
       this.github_user = props.github_user;
       this.repo_url = props.repo_url;
       this.version = props.version;
-      this.useTwig = props.twig;
+      this.twig = props.twig;
 
       done();
     }.bind(this));
@@ -101,7 +101,7 @@ var AppGenerator = yeoman.generators.Base.extend({
   },
 
   addTwigToProject: function() {
-    if (this.useTwig) {
+    if (this.twig) {
       this.copy('layout.twig', 'assets/pages/layout.twig');
       this.composeWith('styleguide:twig', { options: {
         name: 'index'

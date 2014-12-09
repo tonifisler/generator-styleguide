@@ -132,7 +132,7 @@ gulp.task('styleguide', function () {
     .pipe($.hologram());
 });
 
-<% if (useTwig) { %>
+<% if (twig) { %>
 /**
  * Compile TWIG example pages
  */
@@ -152,7 +152,7 @@ gulp.task('clean', del.bind(null, ['build', 'styleguide']));
 /**
  * Serve
  */
-gulp.task('serve', ['styles', 'scripts'<% if (useTwig) { %>, 'twig'<% } %>], function () {
+gulp.task('serve', ['styles', 'scripts'<% if (twig) { %>, 'twig'<% } %>], function () {
   browserSync({
     server: {
       baseDir: ['styleguide'],
@@ -168,7 +168,7 @@ gulp.task('serve', ['styles', 'scripts'<% if (useTwig) { %>, 'twig'<% } %>], fun
   gulp.watch(['assets/js/**/*.js'], function() {
     runSequence('scripts', reload);
   });
-  <% if (useTwig) { %>
+  <% if (twig) { %>
   gulp.watch(['assets/pages/**/*'], function() {
     // clean folder before compiling
     del.bind(null, ['styleguide/pages'])
@@ -198,6 +198,6 @@ gulp.task('build',['clean'], function() {
  * Default task
  */
 gulp.task('default', ['clean'], function(cb) {
-  runSequence('vendors', 'styles', 'img', 'scripts',<% if (useTwig) { %>'twig',<% } %> 'styleguide', cb);
+  runSequence('vendors', 'styles', 'img', 'scripts',<% if (twig) { %>'twig',<% } %> 'styleguide', cb);
 });
 

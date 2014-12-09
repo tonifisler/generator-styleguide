@@ -1,7 +1,7 @@
 # <%= name %>
 
 ```none_example
-<% if (useTwig) { %>
+<% if (twig) { %>
   <a href="pages/index.html" class="btn btn-default">Go to Example Pages</a>
 <% } %>
 <div class="row">
