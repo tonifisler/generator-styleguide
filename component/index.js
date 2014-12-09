@@ -69,7 +69,7 @@ var ComponentGenerator = yeoman.generators.Base.extend({
 
       generatorUtil.rewriteFile({
         file: 'assets/sass/main.scss',
-        needle: '// <here> don\'t remove this comment',
+        needle: '// <here> $ yo styleguide:component will add new components right here. Do not remove this line.',
         splicable: [
           '@import \''+this.component_type+'/'+this.fileBase+'\';'
         ]

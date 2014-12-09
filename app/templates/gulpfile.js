@@ -88,26 +88,28 @@ gulp.task('img', function() {
  * Build styles from SCSS files
  * With error reporting on compiling (so that there's no crash)
  */
-gulp.task('styles', function() {
-  if (argv.production) { console.log('[styles] Processing styles for production env.' ); }
-  else { console.log('[styles] Processing styles for dev env. No minifying here, for sourcemaps!') }
-  return gulp.src('assets/sass/main.scss')
-    .pipe($.rubySass({style: 'compact'}))
-      .on('error', $.notify.onError(function (error) {
-         console.log(error.message);
-         if (!argv.production) {
-           return 'Message to the notifier: ' + error.message;
-         }
-      }))
-    .pipe($.if(!argv.production, $.sourcemaps.init()))
-    .pipe($.autoprefixer({
-      browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1'],
-      cascade: false
-    }))
-    .pipe($.if(argv.production, $.minifyCss()))
-    .pipe($.if(!argv.production, $.sourcemaps.write('.')))
-    .pipe(gulp.dest('build/css'));
-});
+ gulp.task('styles', function() {
+   if (argv.production) { console.log('[styles] Processing styles for production env.' ); }
+   else { console.log('[styles] Processing styles for dev env. No minifying here, for sourcemaps!') }
+
+   return $.rubySass('assets/sass/main.scss', {sourcemap: !argv.production})
+       .on('error', $.notify.onError(function (error) {
+          console.log('Error', error.message);
+          if (!argv.production) {
+            return 'Message to the notifier: ' + error.message;
+          }
+       }))
+     .pipe($.autoprefixer({
+       browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1'],
+       cascade: false
+     }))
+     .pipe($.if(!argv.production, $.sourcemaps.write('.', {
+       includeContent: false,
+       sourceRoot: '/source'
+     })))
+     .pipe($.if(argv.production, $.minifyCss()))
+     .pipe(gulp.dest('build/css'));
+ });
 
 /**
  * Build JS
