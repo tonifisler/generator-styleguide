@@ -53,7 +53,6 @@ $ yo styleguide:drupal
 ## TODO
 
 * Add a README to the Drupal generated files
-* Fix `gulp-twig` endless loop
 
 ## Credits
 
