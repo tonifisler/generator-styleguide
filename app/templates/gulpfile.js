@@ -104,6 +104,20 @@ gulp.task('styles', function() {
 });
 
 /**
+ * Build styles from SCSS files
+ * Only for STYLEGUIDE styles
+ */
+gulp.task('styleguide-styles', function() {
+  return gulp.src('assets/sass/styleguide.scss')
+    .pipe($.sass({errLogToConsole: true}))
+    .pipe($.autoprefixer({
+      browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1']
+    }))
+    .pipe($.minifyCss())
+    .pipe(gulp.dest('build/css'));
+});
+
+/**
  * Build JS
  * With error reporting on compiling (so that there's no crash)
  * And jshint check to highlight errors as we go.
@@ -193,6 +207,7 @@ gulp.task('build',['clean'], function() {
  * Default task
  */
 gulp.task('default', ['clean'], function(cb) {
-  runSequence('vendors', 'styles', 'img', 'scripts',<% if (twig) { %>'twig',<% } %> 'styleguide', cb);
+  var styleguide_styles = argv.production ? '' : 'styleguide-styles';
+  runSequence('vendors', 'styles', 'img', 'scripts',<% if (twig) { %>'twig',<% } %> 'styleguide', styleguide_styles, cb);
 });
 

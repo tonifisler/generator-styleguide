@@ -81,6 +81,7 @@ var AppGenerator = yeoman.generators.Base.extend({
 
     this.copy('assets/sass/bootstrap-variables.scss', 'assets/sass/bootstrap-variables.scss');
     this.copy('assets/sass/bootstrap.scss', 'assets/sass/bootstrap.scss');
+    this.copy('assets/sass/styleguide.scss', 'assets/sass/styleguide.scss');
 
     this.template('assets/sass/project-variables.scss', 'assets/sass/'+this._.slugify(this.name)+'-variables.scss');
     this.template('assets/sass/project-mixins.scss', 'assets/sass/'+this._.slugify(this.name)+'-mixins.scss');
