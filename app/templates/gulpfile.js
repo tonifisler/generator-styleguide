@@ -89,15 +89,25 @@ gulp.task('img', function() {
  * With error reporting on compiling (so that there's no crash)
  */
 gulp.task('styles', function() {
-  if (argv.production) { console.log('[styles] Processing styles for production env.' ); }
-  else { console.log('[styles] Processing styles for dev env. No minifying here, for sourcemaps!') }
+  if (argv.production) { console.log('[styles] Production mode' ); }
+  else { console.log('[styles] Dev mode') }
 
   return gulp.src('assets/sass/main.scss')
-    .pipe($.sass({errLogToConsole: true}))
     .pipe($.if(!argv.production, $.sourcemaps.init()))
-    .pipe($.autoprefixer({
-      browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1']
+    .pipe($.sass({
+      outputStyle: 'nested', // libsass doesn't support expanded yet
+      precision: 10,
+      includePaths: ['.'],
+      onError: console.error.bind(console, 'Sass error:')
     }))
+    .pipe($.postcss([
+      require('autoprefixer-core')({
+        browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1'],
+        options: {
+          map: true
+        }
+      })
+    ]))
     .pipe($.if(!argv.production, $.sourcemaps.write()))
     .pipe($.if(argv.production, $.minifyCss()))
     .pipe(gulp.dest('build/css'));
