@@ -20,11 +20,12 @@ gulp.task('vendors', function() {
    * CSS VENDORS
    */
   gulp.src([
-        ''
-      ])
-      .pipe($.concat('vendors.css'))
-      .pipe($.minifyCss())
-      .pipe(gulp.dest('build/css'));
+      ''
+    ])
+    .pipe($.concat('vendors.css'))
+    .pipe($.minifyCss())
+    .pipe($.size({title: "CSS VENDORS", showFiles: true}))
+    .pipe(gulp.dest('build/css'));
 
   /**
    * JS VENDORS
@@ -48,6 +49,7 @@ gulp.task('vendors', function() {
     ])
     .pipe($.concat('vendors.min.js'))
     .pipe($.uglify())
+    .pipe($.size({title: "JS VENDORS", showFiles: true}))
     .pipe(gulp.dest('build/js'));
 
 
@@ -59,6 +61,7 @@ gulp.task('vendors', function() {
       'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
       'assets/fonts/*'
     ])
+    .pipe($.size({title: "FONTS"}))
     .pipe(gulp.dest('build/fonts'));
 
   /**
@@ -71,6 +74,7 @@ gulp.task('vendors', function() {
     ])
     .pipe($.concat('polyfills.min.js'))
     .pipe($.uglify())
+    .pipe($.size({title: "POLYFILLS", showFiles: true}))
     .pipe(gulp.dest('build/js'));
 });
 
@@ -81,6 +85,7 @@ gulp.task('img', function() {
   gulp.src([
       'assets/img/**/*'
     ])
+    .pipe($.size({title: "IMAGES"}))
     .pipe(gulp.dest('build/img'));
 });
 
@@ -97,9 +102,12 @@ gulp.task('styles', function() {
     .pipe($.sass({
       outputStyle: 'nested', // libsass doesn't support expanded yet
       precision: 10,
-      includePaths: ['.'],
-      onError: console.error.bind(console, 'Sass error:')
+      includePaths: ['.']
     }))
+    .on('error', $.notify.onError({
+      title: 'Sass Error!',
+      message: '<%= error.fileName %>:<%= error.lineNumber %>'
+      }))
     .pipe($.postcss([
       require('autoprefixer-core')({
         browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1'],
@@ -110,6 +118,7 @@ gulp.task('styles', function() {
     ]))
     .pipe($.if(!argv.production, $.sourcemaps.write()))
     .pipe($.if(argv.production, $.minifyCss()))
+    .pipe($.size({title: "STYLES", showFiles: true}))
     .pipe(gulp.dest('build/css'));
 });
 
@@ -119,11 +128,25 @@ gulp.task('styles', function() {
  */
 gulp.task('styleguide-styles', function() {
   return gulp.src('assets/sass/styleguide.scss')
-    .pipe($.sass({errLogToConsole: true}))
-    .pipe($.autoprefixer({
-      browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1']
+    .pipe($.sass({
+      outputStyle: 'nested', // libsass doesn't support expanded yet
+      precision: 10,
+      includePaths: ['.']
     }))
+    .on('error', $.notify.onError({
+      title: 'Sass Error!',
+      message: '<%= error.fileName %>:<%= error.lineNumber %>'
+    }))
+    .pipe($.postcss([
+      require('autoprefixer-core')({
+        browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'ff 27', 'opera 12.1'],
+        options: {
+          map: true
+        }
+      })
+    ]))
     .pipe($.minifyCss())
+    .pipe($.size({title: "STYLEGUIDE STYLES", showFiles: true}))
     .pipe(gulp.dest('build/css'));
 });
 
@@ -140,6 +163,7 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('build/js'))
     .pipe($.rename({ suffix: '.min' }))
     .pipe($.uglify())
+    .pipe($.size({title: "JS SCRIPTS", showFiles: true}))
     .pipe(gulp.dest('build/js'));
 });
 
@@ -171,7 +195,7 @@ gulp.task('clean', del.bind(null, ['build', 'styleguide']));
 /**
  * Serve
  */
-gulp.task('serve', ['styles', 'scripts'<% if (twig) { %>, 'twig'<% } %>], function () {
+gulp.task('serve', ['default'], function () {
   browserSync({
     server: {
       baseDir: ['styleguide'],
@@ -218,6 +242,6 @@ gulp.task('build',['clean'], function() {
  */
 gulp.task('default', ['clean'], function(cb) {
   var styleguide_styles = argv.production ? '' : 'styleguide-styles';
-  runSequence('vendors', 'styles', 'img', 'scripts',<% if (twig) { %>'twig',<% } %> 'styleguide', styleguide_styles, cb);
+  runSequence(['vendors', 'styles', 'img', 'scripts'<% if (twig) { %>, 'twig'<% } %>] 'styleguide', styleguide_styles, cb);
 });
 
