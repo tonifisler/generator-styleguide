@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "chalk": "^1.0.0",
-    "yeoman-generator": "^0.18.9",
-    "yosay": "^1.0.2"
+    "yeoman-generator": "^0.18.10",
+    "yosay": "^1.0.3"
   },
   "peerDependencies": {
     "yo": ">=1.0.0",
