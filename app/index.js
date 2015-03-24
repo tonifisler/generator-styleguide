@@ -14,7 +14,7 @@ var AppGenerator = yeoman.generators.Base.extend({
         this.installDependencies();
         this.log(yosay('Everything went smoothly! We\'ll just download the dependencies now. Bye from Antistatique!'));
       } else {
-        this.log(yosay('Everything went smoothly! Bye from Antistatique!'));
+        this.log(yosay('Everything went smoothly! Run $ gulp init and you\'ll be ready to go! Bye from Antistatique!'));
       }
     });
   },
