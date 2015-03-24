@@ -1,4 +1,4 @@
-# <%=name%> Styleguide
+# <%=name%>
 
 ### Install the styleguide
 
