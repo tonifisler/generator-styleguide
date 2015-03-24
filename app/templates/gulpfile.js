@@ -15,7 +15,7 @@ var gulp = require('gulp'),
  * Init project
  */
 gulp.task('init', function() {
-  gulp.src('bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss')
+  return gulp.src('bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss')
     .pipe($.rename('bootstrap-variables.scss'))
     .pipe(gulp.dest('assets/sass'))
 });
@@ -25,24 +25,29 @@ gulp.task('init', function() {
  * Build vendors dependencies
  */
 gulp.task('vendors', function() {
+  return gulp.start('css-vendors', 'js-vendors', 'fonts', 'polyfills');
+});
 
-  /**
-   * CSS VENDORS
-   */
-  gulp.src([
+/**
+ * CSS VENDORS
+ */
+gulp.task('css-vendors', function() {
+  return gulp.src([
       ''
     ])
     .pipe($.concat('vendors.css'))
     .pipe($.minifyCss())
     .pipe($.size({title: "CSS VENDORS", showFiles: true}))
     .pipe(gulp.dest('build/css'));
+});
 
-  /**
-   * JS VENDORS
-   * (with jQuery and Bootstrap dependencies first)
-   */
+/**
+ * JS VENDORS
+ * (with jQuery and Bootstrap dependencies first)
+ */
 
-  gulp.src([
+gulp.task('js-vendors', function() {
+  return gulp.src([
       'bower_components/jquery/dist/jquery.js',
       'bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js',
       'bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js',
@@ -61,24 +66,28 @@ gulp.task('vendors', function() {
     .pipe($.uglify())
     .pipe($.size({title: "JS VENDORS", showFiles: true}))
     .pipe(gulp.dest('build/js'));
+});
 
 
-  /**
-   * FONTS SOURCES
-   * Important to add the bootstrap fonts to avoid issues with the fonts include path
-   */
-  gulp.src([
+/**
+ * FONTS SOURCES
+ * Important to add the bootstrap fonts to avoid issues with the fonts include path
+ */
+gulp.task('fonts', function() {
+  return gulp.src([
       'bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
       'assets/fonts/*'
     ])
     .pipe($.size({title: "FONTS"}))
     .pipe(gulp.dest('build/fonts'));
+});
 
-  /**
-   * POLYFILLS SOURCES
-   * Various polyfills required for old IE
-   */
-  gulp.src([
+/**
+ * POLYFILLS SOURCES
+ * Various polyfills required for old IE
+ */
+gulp.task('polyfills', function() {
+  return gulp.src([
       'bower_components/html5shiv/dist/html5shiv.js',
       'bower_components/respond/dest/respond.src.js'
     ])
@@ -92,7 +101,7 @@ gulp.task('vendors', function() {
  * Copy images
  */
 gulp.task('img', function() {
-  gulp.src([
+  return gulp.src([
       'assets/img/**/*'
     ])
     .pipe($.size({title: "IMAGES"}))
@@ -165,7 +174,7 @@ gulp.task('styleguide-styles', function() {
     ]))
     .pipe($.minifyCss())
     .pipe($.size({title: "STYLEGUIDE STYLES", showFiles: true}))
-    .pipe(gulp.dest('build/css'));
+    .pipe(gulp.dest('styleguide/css'));
 });
 
 /**
@@ -193,8 +202,7 @@ gulp.task('styleguide', function () {
     .pipe($.hologram());
 });
 
-<% if (twig) { %>
-/**
+<% if (twig) { %>/**
  * Compile TWIG example pages
  */
 
@@ -202,17 +210,16 @@ gulp.task('twig', function () {
     return gulp.src('assets/pages/*.twig')
         .pipe($.twig())
         .pipe(gulp.dest('styleguide/pages'));
-});
-<% } %>
+});<% } %>
 
 /**
  * Clean output directories
  */
-gulp.task('clean', del.bind(null, ['build', 'styleguide']));
+ gulp.task('clean', del.bind(null, ['build', 'styleguide']));
 
-/**
- * Serve
- */
+ /**
+  * Serve
+  */
 gulp.task('serve', ['default'], function () {
   browserSync({
     server: {
@@ -221,21 +228,19 @@ gulp.task('serve', ['default'], function () {
     open: false
   });
   gulp.watch(['assets/sass/**/*.scss'], function() {
-    runSequence('styles', 'styleguide', reload);
+    runSequence('styles', 'styleguide-styles', 'styleguide', reload);
   });
   gulp.watch(['assets/img/**/*'], function() {
     runSequence('img', 'styleguide', reload);
   });
   gulp.watch(['assets/js/**/*.js'], function() {
     runSequence('scripts', reload);
-  });
-  <% if (twig) { %>
+  });<% if (twig) { %>
   gulp.watch(['assets/pages/**/*'], function() {
     // clean folder before compiling
     del.bind(null, ['styleguide/pages'])
     runSequence('twig', reload);
-  });
-  <% } %>
+  });<% } %>
 });
 
 /**
@@ -243,7 +248,7 @@ gulp.task('serve', ['default'], function () {
  */
 
 gulp.task('deploy', function () {
-  gulp.src("styleguide/**/*")
+  return gulp.src("styleguide/**/*")
     .pipe($.ghPages());
 });
 
@@ -251,8 +256,8 @@ gulp.task('deploy', function () {
  * Task to build assets on production server
  */
 gulp.task('build',['clean'], function() {
-    argv.production = true;
-    runSequence('vendors', 'styles', 'img', 'scripts');
+  argv.production = true;
+  return gulp.start('vendors', 'styles', 'img', 'scripts');
 });
 
 /**
@@ -260,6 +265,6 @@ gulp.task('build',['clean'], function() {
  */
 gulp.task('default', ['clean'], function(cb) {
   var styleguide_styles = argv.production ? '' : 'styleguide-styles';
-  runSequence(['vendors', 'styles', 'img', 'scripts'<% if (twig) { %>, 'twig'<% } %>], 'styleguide', styleguide_styles, cb);
+  runSequence(['js-vendors', 'css-vendors', 'polyfills', 'fonts', 'styles', 'img', 'scripts'<% if (twig) { %>, 'twig'<% } %>], 'styleguide', styleguide_styles, cb);
 });
 
