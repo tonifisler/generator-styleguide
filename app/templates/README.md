@@ -5,7 +5,7 @@
 ```bash
 $ npm install
 $ bower install
-$ gulp
+$ gulp init
 ```
 
 ### Build the styleguide with minification

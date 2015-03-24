@@ -12,7 +12,7 @@ var AppGenerator = yeoman.generators.Base.extend({
     this.on('end', function () {
       if (!this.options['skip-install']) {
         this.installDependencies();
-        this.log(yosay('Everything went smoothly! We\'ll just download the dependencies now. Bye from Antistatique!'));
+        this.log(yosay('Everything went smoothly! We\'ll just download the dependencies now. Then run $ gulp init and you\'ll be ready to go!  Bye from Antistatique!'));
       } else {
         this.log(yosay('Everything went smoothly! Run $ gulp init and you\'ll be ready to go! Bye from Antistatique!'));
       }
@@ -79,7 +79,6 @@ var AppGenerator = yeoman.generators.Base.extend({
 
     this.mkdir('assets/fonts');
 
-    this.copy('assets/sass/bootstrap-variables.scss', 'assets/sass/bootstrap-variables.scss');
     this.copy('assets/sass/bootstrap.scss', 'assets/sass/bootstrap.scss');
     this.copy('assets/sass/styleguide.scss', 'assets/sass/styleguide.scss');
     this.copy('assets/js/main.js', 'assets/js/main.js');
