@@ -246,6 +246,6 @@ gulp.task('build',['clean'], function() {
  */
 gulp.task('default', ['clean'], function(cb) {
   var styleguide_styles = argv.production ? '' : 'styleguide-styles';
-  runSequence(['vendors', 'styles', 'img', 'scripts'<% if (twig) { %>, 'twig'<% } %>] 'styleguide', styleguide_styles, cb);
+  runSequence(['vendors', 'styles', 'img', 'scripts'<% if (twig) { %>, 'twig'<% } %>], 'styleguide', styleguide_styles, cb);
 });
 
