@@ -1,3 +1,6 @@
+# Styleguide title
+styleguide_name: '<%=name%>'
+
 # Directory to parse
 source: assets
 
@@ -5,8 +8,8 @@ source: assets
 destination: styleguide
 
 # Hologram theme
-documentation_assets: bower_components/Cortana
-custom_markdown: bower_components/Cortana/CortanaMarkdownRenderer.rb
+documentation_assets: bower_components/cortana-two
+custom_markdown: bower_components/cortana-two/CustomMarkdownRenderer.rb
 
 # To have a custom index page build with your README.md
 index: README
@@ -21,6 +24,7 @@ dependencies:
 css_include:
 # - 'css/vendors.css'
   - 'css/main.css'
+  - 'css/styleguide.css'
 
 # List all js to include for the styleguide render examples (path from styleguide directory)
 js_include:
