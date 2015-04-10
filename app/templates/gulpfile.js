@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 gulp.task('init', function() {
   return gulp.src('bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss')
     .pipe($.rename('bootstrap-variables.scss'))
-    .pipe(gulp.dest('assets/sass'))
+    .pipe(gulp.dest('assets/sass'));
 });
 
 
@@ -37,7 +37,7 @@ gulp.task('css-vendors', function() {
     ])
     .pipe($.concat('vendors.css'))
     .pipe($.minifyCss())
-    .pipe($.size({title: "CSS VENDORS", showFiles: true}))
+    .pipe($.size({title: 'CSS VENDOR', showFiles: true}))
     .pipe(gulp.dest('build/css'));
 });
 
@@ -64,7 +64,7 @@ gulp.task('js-vendors', function() {
     ])
     .pipe($.concat('vendors.min.js'))
     .pipe($.uglify())
-    .pipe($.size({title: "JS VENDORS", showFiles: true}))
+    .pipe($.size({title: 'JS VENDORS', showFiles: true}))
     .pipe(gulp.dest('build/js'));
 });
 
@@ -78,7 +78,7 @@ gulp.task('fonts', function() {
       'bower_components/bootstrap-sass/assets/fonts/bootstrap/*',
       'assets/fonts/*'
     ])
-    .pipe($.size({title: "FONTS"}))
+    .pipe($.size({title: 'FONTS'}))
     .pipe(gulp.dest('build/fonts'));
 });
 
@@ -93,7 +93,7 @@ gulp.task('polyfills', function() {
     ])
     .pipe($.concat('polyfills.min.js'))
     .pipe($.uglify())
-    .pipe($.size({title: "POLYFILLS", showFiles: true}))
+    .pipe($.size({title: 'POLYFILLS', showFiles: true}))
     .pipe(gulp.dest('build/js'));
 });
 
@@ -104,7 +104,7 @@ gulp.task('img', function() {
   return gulp.src([
       'assets/img/**/*'
     ])
-    .pipe($.size({title: "IMAGES"}))
+    .pipe($.size({title: 'IMAGES'}))
     .pipe(gulp.dest('build/img'));
 });
 
@@ -114,7 +114,7 @@ gulp.task('img', function() {
  */
 gulp.task('styles', function() {
   if (argv.production) { console.log('[styles] Production mode' ); }
-  else { console.log('[styles] Dev mode') }
+  else { console.log('[styles] Dev mode'); }
 
   return gulp.src('assets/sass/main.scss')
     .pipe($.if(!argv.production, $.sourcemaps.init()))
@@ -125,10 +125,10 @@ gulp.task('styles', function() {
     }))
     .on('error', $.notify.onError({
       title: function(error) {
-        return error.message
+        return error.message;
       },
       message: function(error) {
-        return error.fileName + ':' + error.lineNumber
+        return error.fileName + ':' + error.lineNumber;
       }
     }))
     .pipe($.postcss([
@@ -141,7 +141,7 @@ gulp.task('styles', function() {
     ]))
     .pipe($.if(!argv.production, $.sourcemaps.write()))
     .pipe($.if(argv.production, $.minifyCss()))
-    .pipe($.size({title: "STYLES", showFiles: true}))
+    .pipe($.size({title: 'STYLES', showFiles: true}))
     .pipe(gulp.dest('build/css'));
 });
 
@@ -158,10 +158,10 @@ gulp.task('styleguide-styles', function() {
     }))
     .on('error', $.notify.onError({
       title: function(error) {
-        return error.message
+        return error.message;
       },
       message: function(error) {
-        return error.fileName + ':' + error.lineNumber
+        return error.fileName + ':' + error.lineNumber;
       }
     }))
     .pipe($.postcss([
@@ -173,7 +173,7 @@ gulp.task('styleguide-styles', function() {
       })
     ]))
     .pipe($.minifyCss())
-    .pipe($.size({title: "STYLEGUIDE STYLES", showFiles: true}))
+    .pipe($.size({title: 'STYLEGUIDE STYLES', showFiles: true}))
     .pipe(gulp.dest('styleguide/css'));
 });
 
@@ -190,7 +190,7 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('build/js'))
     .pipe($.rename({ suffix: '.min' }))
     .pipe($.uglify())
-    .pipe($.size({title: "JS SCRIPTS", showFiles: true}))
+    .pipe($.size({title: 'JS SCRIPTS', showFiles: true}))
     .pipe(gulp.dest('build/js'));
 });
 
@@ -238,7 +238,7 @@ gulp.task('serve', ['default'], function () {
   });<% if (twig) { %>
   gulp.watch(['assets/pages/**/*'], function() {
     // clean folder before compiling
-    del.bind(null, ['styleguide/pages'])
+    del.bind(null, ['styleguide/pages']);
     runSequence('twig', reload);
   });<% } %>
 });
@@ -248,7 +248,7 @@ gulp.task('serve', ['default'], function () {
  */
 
 gulp.task('deploy', function () {
-  return gulp.src("styleguide/**/*")
+  return gulp.src('styleguide/**/*')
     .pipe($.ghPages());
 });
 
@@ -264,7 +264,7 @@ gulp.task('build',['clean'], function() {
  * Default task
  */
 gulp.task('default', ['clean'], function(cb) {
-  var styleguide_styles = argv.production ? '' : 'styleguide-styles';
-  runSequence(['js-vendors', 'css-vendors', 'polyfills', 'fonts', 'styles', 'img', 'scripts'<% if (twig) { %>, 'twig'<% } %>], 'styleguide', styleguide_styles, cb);
+  var styleguideStyles = argv.production ? '' : 'styleguide-styles';
+  runSequence(['js-vendors', 'css-vendors', 'polyfills', 'fonts', 'styles', 'img', 'scripts'<% if (twig) { %>, 'twig'<% } %>], 'styleguide', styleguideStyles, cb);
 });
 
