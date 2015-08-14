@@ -12,7 +12,7 @@ documentation_assets: bower_components/cortana-two
 custom_markdown: bower_components/cortana-two/CustomMarkdownRenderer.rb
 
 # To have a custom index page build with your README.md
-index: README
+index: README.md
 
 dependencies:
   - build/js
